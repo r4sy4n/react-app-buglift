@@ -42,6 +42,14 @@ p {
     margin-bottom: 1.5rem;
     max-width: 40em;
 }
+a {
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+a,
+button {
+    line-height: 1.15;
+}
 .img-logo {
     height: 5rem;
 }
@@ -72,4 +80,7 @@ p {
 .btn-hero {
     font-size: 1.25rem;
     padding: 0.5rem 1.25rem;
+}
+.full-page {
+    min-height: 100vh;
 }

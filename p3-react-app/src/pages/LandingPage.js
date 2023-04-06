@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/images/logo.png';
 import banner from '../assets/images/banner.png';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.main`
   nav {
@@ -51,7 +52,7 @@ const LandingPage = () => {
         <div>
           <h1>Bug <span>Tracker</span> App</h1>
           <p>BugLift is an <span>online</span> bug tracker and issue tracking app that helps you to track and fix bugs quickly. It is also a <span>collection</span> of tickets for projects regarding the issues/bugs or future requests in your software <span>development</span> project.</p>
-          <button className='btn btn-hero'>Login/Register</button>
+          <Link to='/register' className='btn btn-hero'>Login/Register</Link>
         </div>
         <img src={logo} alt='buglift logo' className='img main-img' />
       </div>
