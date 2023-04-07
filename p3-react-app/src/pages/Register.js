@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import banner from '../assets/images/banner.png';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 const Wrapper = styled.section`
   display: grid;
@@ -77,25 +78,28 @@ const Register = () => {
         const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[!\@\-\#\$\.\%\&\*])(?=.*[a-zA-Z]).{8,}$/;          
         
         if(regex.test(pwd) && pwd === confirmpwd && (isRegistered && name === '') && email !== ''){ // If all inputs are valid, clear error messages and show success message
-            setSuccessMessage('Registration Successful!');
+            // setSuccessMessage('Login Successful!');
             setName('');
             setEmail('');
             setPassword('');
             setConfirmpassword('');
-            alert('Registration Successful!');
+            toast.success('Login Successful!');
         }else if(regex.test(pwd) && pwd === confirmpwd && (!isRegistered && name !== '') && email !== ''){
-            setSuccessMessage('Registration Successful!');
+            // setSuccessMessage('Registration Successful!');
             setName('');
             setEmail('');
             setPassword('');
             setConfirmpassword('');
-            alert('Registration Successful!');
+            toast.success('Registration Successful!');
         }else if((!isRegistered && name === '') || pwd === '' || confirmpwd === '' || email === ''){ // Validate username, password and confirm password field
-            setSuccessMessage('All fields are required!');
+            // setSuccessMessage('All fields are required!');
+            toast.error('All fields are required!');
         }else if(!regex.test(pwd)){ // Validate password
-            setPasswordError('Password must be at least 8 characters and include uppercase and lowercase letters, numbers, and special characters.');
+            // setPasswordError('Password must be at least 8 characters and include uppercase and lowercase letters, numbers, and special characters.');
+            toast.warn('Password must be at least 8 characters and include uppercase and lowercase letters, numbers, and special characters.');
         }else if(confirmpwd !== pwd){ // Validate confirm password
-            setConfirmPasswordError('Password do not match');
+            // setConfirmPasswordError('Password do not match');
+            toast.warn('Password do not match');
         }
     };
     const toggleMember = () => {
