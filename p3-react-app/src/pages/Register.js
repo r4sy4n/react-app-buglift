@@ -34,7 +34,7 @@ const Wrapper = styled.section`
     color: #3b82f6;
     cursor: pointer;
     letter-spacing: 1px;
-  }
+}
 `
 
 const Register = () => {
