@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import banner from '../assets/images/banner.png';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { Banner } from '../components';
 
 const Wrapper = styled.section`
   display: grid;
@@ -48,7 +48,7 @@ const Register = () => {
     const [confirmPwdError, setConfirmPasswordError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isRegistered, setIsRegistered] = useState(true);
-
+    
     //function to handle changes in username input field
     const nameChangeHandler = ( event ) => {
         setName( event.target.value );
@@ -110,7 +110,7 @@ const Register = () => {
     return(
         <Wrapper className='full-page'>
             <form onSubmit={ submitHandler } className='form'>
-                <img src={banner} alt='buglift banner' className='logo img-logo'/>
+                <Banner/>
                 <h3>{isRegistered ? 'Login' : 'Register'}</h3>
                 {!isRegistered && <label htmlFor='name' className='form-label'>Name</label>}
                 {!isRegistered && <input 
@@ -141,7 +141,7 @@ const Register = () => {
                 <div>
                     {<p>{successMessage}</p>}
                 </div>
-                <input type='submit' value='Submit' className='btn btn-block'></input>
+                <input type='submit' value={isRegistered ? 'Sign In' : 'Submit'} className='btn btn-block'></input>
                 <p>
                     {isRegistered ? 'Not yet registered? ' : 'Already registered? '}
                     <button type='button' onClick={toggleMember} className='member-btn'>
