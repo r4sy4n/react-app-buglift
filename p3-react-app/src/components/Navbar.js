@@ -6,6 +6,8 @@ import {GiHamburgerMenu} from 'react-icons/gi';
 import {SlLogout} from 'react-icons/sl'
 import { Link } from 'react-router-dom';
 import { SharedLayoutContext } from '../pages/dashboard/SharedLayout';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Wrapper = styled.nav`
   height: 6rem;
@@ -40,7 +42,7 @@ const Wrapper = styled.nav`
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-left: 1rem;
+    margin-left: 2rem;
   }
   .logout-btn {
     background: transparent;
@@ -50,13 +52,12 @@ const Wrapper = styled.nav`
     font-size: 1.75rem;
     top: 40px;
     left: 0;
-    margin: 10px;
+    margin: 0 10px;
     padding: 0.5rem;
   }
   .btn {
     width: 108px;
     text-align: center;
-    margin-left: 10rem;
   }
   .nav-move{
     display: flex;
@@ -78,8 +79,14 @@ const Wrapper = styled.nav`
 const Navbar = () => {
   const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
   const [sidebar, setSidebar] = useState(false);
-
+  const navigate = useNavigate();
   // const hideSidebar = () => setSidebar(!sidebar);
+  const Logout = () => {
+    toast.success('Logout Successful')
+      setTimeout(() =>{
+        navigate('/landing');  
+      }, 600);
+  }
   console.log(showSidebar);
   return (
     <Wrapper>
@@ -92,7 +99,7 @@ const Navbar = () => {
           </button>
             <Banner />
           <Link to='createticket' className='btn'>New Ticket</Link>
-          <button type='button' className='logout-btn'>
+          <button type='button' className='logout-btn' onClick={Logout}>
             <SlLogout/>
           </button>
       </div>

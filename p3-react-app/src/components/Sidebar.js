@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Banner from './Banner';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { SharedLayoutContext } from '../pages/dashboard/SharedLayout';
+import Navlinks from './Navlinks';
 
 const Wrapper = styled.aside`
 box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
@@ -13,9 +14,10 @@ transition: 0.3s ease-in-out all;
         min-height: 100vh;
         height: 100%;
         width: 250px;
-        /* margin-left: -250px;
-        display: none; */
+        /* margin-left: 0; */
+        /* display: none; */
         transition: 0.3s ease-in-out all;
+        z-index: 1;
         
     }
   .content {
@@ -29,6 +31,42 @@ transition: 0.3s ease-in-out all;
       justify-content: center;
       align-items: center;
       padding: 0 2.5rem;
+      z-index: 1;
+    }
+    .nav-links {
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      display: grid;
+      place-items: center;
+      transition: 0.3s ease-in-out all;
+    }
+    .active {
+      color: #102a43;
+    }
+    .active .icon {
+      color: #E21818;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      color: #627d98;
+      padding: 1rem 0;
+      padding-left: 2.5rem;
+      text-transform: capitalize;
+      transition: 0.3s ease-in-out all;
+    }
+    .nav-link:hover {
+      background: #f0f4f8;
+      padding-left: 3rem;
+      color: #102a43;
+    }
+    .nav-link:hover .icon {
+      color: #E21818;
     }
 `
 const Sidebar = () => {
@@ -41,7 +79,7 @@ const Sidebar = () => {
           <header>
             <Banner />
           </header>
-          <h2>Sidebar</h2>
+          <Navlinks/>
         </div>
       </div>
     </Wrapper>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { Banner } from '../components';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.section`
   display: grid;
@@ -48,7 +49,7 @@ const Register = () => {
     const [confirmPwdError, setConfirmPasswordError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isRegistered, setIsRegistered] = useState(true);
-    
+    const navigate = useNavigate();
     //function to handle changes in username input field
     const nameChangeHandler = ( event ) => {
         setName( event.target.value );
@@ -78,6 +79,11 @@ const Register = () => {
         const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[!\@\-\#\$\.\%\&\*])(?=.*[a-zA-Z]).{8,}$/;          
         
         if(regex.test(pwd) && pwd === confirmpwd && (isRegistered && name === '') && email !== ''){ // If all inputs are valid, clear error messages and show success message
+            if (email === 'admin@admin.com'){
+                setTimeout(() =>{
+                  navigate('/');  
+                }, 600);
+                }
             // setSuccessMessage('Login Successful!');
             setName('');
             setEmail('');
@@ -106,6 +112,8 @@ const Register = () => {
         setIsRegistered( !isRegistered );
         setSuccessMessage('');
     };
+    
+    
     
     return(
         <Wrapper className='full-page'>
