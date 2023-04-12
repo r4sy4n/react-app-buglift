@@ -87,7 +87,6 @@ const Navbar = () => {
         navigate('/landing');  
       }, 600);
   }
-  console.log(showSidebar);
   return (
     <Wrapper>
       <div className={sidebar ? 'nav-move' : 'nav-center'}>

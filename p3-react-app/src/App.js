@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage, Register, ErrorPage} from './pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Dashboard, Tickets, Projects, CreateProject, CreateTicket, EditTicket, SharedLayout, UserProfile, Admin} from './pages/dashboard/';
+import {Dashboard, Tickets, Projects, CreateProject, CreateTicket, EditTicket, SharedLayout, UserProfile, Admin, ProjectDetails} from './pages/dashboard/';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           <Route path='createproject' element={<CreateProject/>}/>
           <Route path='createticket' element={<CreateTicket/>}/>
           <Route path='editticket' element={<EditTicket/>}/>
+          <Route path='projectdetails' element={<ProjectDetails/>}/>
           <Route path='userprofile' element={<UserProfile/>}/>
           <Route path='admin' element={<Admin/>}/>
         </Route>

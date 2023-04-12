@@ -19,9 +19,6 @@ const Wrapper = styled.section`
   /* .form-center {
     grid-template-columns: 1fr 1fr 1fr;
   } */
-  .form-center button {
-    margin-top: 2rem;
-  }  
   .form {
     margin: 0;
     border-radius: 0;
@@ -38,7 +35,7 @@ const Wrapper = styled.section`
   .form-center button {
     align-self: end;
     height: 35px;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
   .form-move{
     margin: 0;
