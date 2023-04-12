@@ -2,7 +2,6 @@ import { useState, createContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import {Navbar, Sidebar, Smallsidebar} from '../../components/index';
 import styled from 'styled-components';
-
 export const SharedLayoutContext = createContext();
 
 const Wrapper = styled.section`
