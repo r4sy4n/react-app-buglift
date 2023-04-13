@@ -70,7 +70,7 @@ transition: 0.3s ease-in-out all;
     }
 `
 const Sidebar = () => {
-      const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
+      const {showSidebar} = useContext(SharedLayoutContext);
 
   return (
    <Wrapper className={showSidebar ? null : 'hide'}>

@@ -55,9 +55,11 @@ const CreateProject = () => {
   const [values, setValues] = useState("Manager");
   const [projectName, setProjectName] = useState('');
   const [description, setDescription] = useState('');
-  const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
+  const {showSidebar} = useContext(SharedLayoutContext);
   const {projects, setProjects} = useContext(AppContext);
   const navigate = useNavigate();
+  // const {id} = useParams();
+
   const handleChange = (event) => {
     setValues(event.target.value);
   };
@@ -69,7 +71,7 @@ const CreateProject = () => {
   };
   const submitHandler = (event) =>{
     event.preventDefault();
-    if(!projectName && !description){
+    if(!projectName || !description){
       toast.error('All fields are required!');
     }
     if(projectName && description){
@@ -80,8 +82,10 @@ const CreateProject = () => {
       }, 600);
     }
   }
+  
   const addProject = () => {
     let newEntry = {
+      // id: id,
       name: projectName,
       description: description
     }

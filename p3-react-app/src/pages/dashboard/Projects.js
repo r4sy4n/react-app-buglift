@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useContext, useState, createContext } from 'react';
+import { useContext } from 'react';
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from "../../App";
@@ -39,6 +39,7 @@ const Wrapper = styled.section`
 table {
   border-collapse: collapse;
   width: 100%;
+  margin-top: 3rem;
 }
 tr:hover {
   background: #f0f4f8;
@@ -61,9 +62,9 @@ p:hover {
 `
 
 const Projects = () => {
-  const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
+  const {showSidebar} = useContext(SharedLayoutContext);
   const navigate = useNavigate();
-  const {projects, setProjects} = useContext(AppContext);
+  const {projects} = useContext(AppContext);
 
   const clickHandle = (e) => {
     e.preventDefault();
@@ -72,19 +73,8 @@ const Projects = () => {
   const handleDetail = (id) => {
     navigate(`/projectdetails/${id}`);
   }
-  // const addProject = (project) => {
-  //   let newEntry = {
-  //     name: project,
-  //     description: project
-  //   }
-  //   setNewProject ([
-  //     ...newProject,
-  //       newEntry
-  //   ]);
-  // }
 
-  return (  
-    
+  return (    
       <Wrapper>
         <form className={showSidebar ? 'table' : 'table-move'}>
           <button type='button' className='btn btn-block' onClick={clickHandle}>Create New Project</button>
@@ -112,8 +102,7 @@ const Projects = () => {
             </div>
         </form>
       </Wrapper>    
-    
   )
 }
 
-export default Projects
+export default Projects;

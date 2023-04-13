@@ -111,6 +111,9 @@ button {
     background: #f0f4f8;
     border: 1px solid #bcccdc;
 }
+.form-textarea {
+    height: 7rem;
+}
 .form-input,
 .form-select,
 .btn-block {

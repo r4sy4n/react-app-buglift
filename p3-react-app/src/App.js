@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Dashboard, Tickets, Projects, CreateProject, CreateTicket, EditTicket, SharedLayout, UserProfile, Admin, ProjectDetails} from './pages/dashboard/';
 import { createContext, useState } from 'react';
+export const AppContext = createContext();
 
 const initialProjects = [
   {
@@ -26,12 +27,38 @@ const initialProjects = [
     detail: "",
   },
 ];
-export const AppContext = createContext();
+const initialTicket = ([
+    {
+      id: 1,
+      title: "Fix login page issue",
+      submittedBy: "John Smith",
+      ticketType: "Bugs/Error",
+      ticketStatus: "Open",
+      ticketPriority: "High",
+    },
+    {
+      id: 2,
+      title: "Add new feature to dashboard",
+      submittedBy: "Mary Jones",
+      ticketType: "Feature Request",
+      ticketStatus: "In Progress",
+      ticketPriority: "Medium",
+    },
+    {
+      id: 3,
+      title: "Update payment system",
+      submittedBy: "Alex Lee",
+      ticketType: "Task",
+      ticketStatus: "Closed",
+      ticketPriority: "Low",
+    },
+  ]);
 
 function App() {
   const [projects, setProjects] = useState(initialProjects);
+  const [tickets, setTickets] = useState(initialTicket);
   return (
-    <AppContext.Provider value={{projects, setProjects}}>
+    <AppContext.Provider value={{projects, setProjects, tickets, setTickets}}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SharedLayout />}>
