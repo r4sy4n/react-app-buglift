@@ -5,6 +5,8 @@ import { useContext } from 'react';
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AppContext } from '../../App';
+
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -49,13 +51,13 @@ const Wrapper = styled.section`
 `
 
 const CreateProject = () => {
-  const projects = ["Manager", "Project Manager", "User"];
+  const projectUser = ["Manager", "Project Manager", "User"];
   const [values, setValues] = useState("Manager");
   const [projectName, setProjectName] = useState('');
   const [description, setDescription] = useState('');
   const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
+  const {projects, setProjects} = useContext(AppContext);
   const navigate = useNavigate();
-
   const handleChange = (event) => {
     setValues(event.target.value);
   };
@@ -71,11 +73,22 @@ const CreateProject = () => {
       toast.error('All fields are required!');
     }
     if(projectName && description){
+      addProject();
       toast.success('Project Created');
       setTimeout(() =>{
         navigate('/projects');  
       }, 600);
     }
+  }
+  const addProject = () => {
+    let newEntry = {
+      name: projectName,
+      description: description
+    }
+    setProjects ([
+      ...projects,
+        newEntry
+    ]);
   }
   return (
     <Wrapper> 
@@ -100,7 +113,7 @@ const CreateProject = () => {
             <div className='form-label'>Assign Project</div>
             <select className='form-select' value={values} onChange={handleChange}>
               {
-                projects.map(project =><option value={project}>{project}</option>)
+                projectUser.map((project, index) =><option key={index} value={project}>{project}</option>)
               }        
             </select>
           </div>

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useContext } from 'react';
+import { useContext, useState, createContext } from 'react';
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from "../../App";
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -50,73 +51,68 @@ th, td {
 th {
   background-color: #ddd;
 }
-a {
+p {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 18px;
 }
-a:hover {
+p:hover {
   color: #E21818;
 }
 `
-const projects = [
-  {
-    name: "Project A",
-    description: "This project aims to build a web application for managing inventory",
-    detail: "",
-  },
-  {
-    name: "Project B",
-    description: "This project focuses on developing a machine learning algorithm for predicting customer churn",
-    detail: "",
-  },
-  {
-    name: "Project C",
-    description: "This project involves building a mobile app for ordering food from local restaurants",
-    detail: "",
-  },
-];
 
 const Projects = () => {
   const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
   const navigate = useNavigate();
+  const {projects, setProjects} = useContext(AppContext);
 
   const clickHandle = (e) => {
     e.preventDefault();
     navigate('/createproject');   
   }
-  const handleDetail = (e) => {
-    e.preventDefault();
-    navigate('/projectdetails');
+  const handleDetail = (id) => {
+    navigate(`/projectdetails/${id}`);
   }
+  // const addProject = (project) => {
+  //   let newEntry = {
+  //     name: project,
+  //     description: project
+  //   }
+  //   setNewProject ([
+  //     ...newProject,
+  //       newEntry
+  //   ]);
+  // }
 
-  return (    
-    <Wrapper>
-      <form className={showSidebar ? 'table' : 'table-move'}>
-        <button type='button' className='btn btn-block' onClick={clickHandle}>Create New Project</button>
-          <div className="project-table form-center">
-            <h3>Project List</h3>
-            <p>All projects list</p>
-            <table>
-              <thead>
-                <tr>
-                  <th>Project Name</th>
-                  <th>Description</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {projects.map((project, index) => (
-                  <tr key={index}>
-                    <td>{project.name}</td>
-                    <td>{project.description}</td>
-                    <td><a href={project.detail} onClick={handleDetail}>Details</a></td>
+  return (  
+    
+      <Wrapper>
+        <form className={showSidebar ? 'table' : 'table-move'}>
+          <button type='button' className='btn btn-block' onClick={clickHandle}>Create New Project</button>
+            <div className="project-table form-center">
+              <h3>Project List</h3>
+              <span>All projects list</span>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Description</th>
+                    <th>Details</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-      </form>
-    </Wrapper>    
+                </thead>
+                <tbody>
+                  {projects.map((project, index) => (
+                    <tr key={index}>
+                      <td>{project.name}</td>
+                      <td>{project.description}</td>
+                      <td><p onClick={() => handleDetail(project.id)}>Details</p></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+        </form>
+      </Wrapper>    
+    
   )
 }
 
