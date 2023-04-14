@@ -94,7 +94,7 @@ const Projects = () => {
                     <tr key={index}>
                       {project.name && <td>{project.name}</td>}
                       {project.description && <td>{project.description}</td>}
-                      {project.name && <td><p onClick={() => handleDetail(project.id)}>Details</p></td>}
+                      {project.name && <td><p onClick={() => handleDetail(project.id)}>More Details</p></td>}
                     </tr>
                   ))}
                 </tbody>

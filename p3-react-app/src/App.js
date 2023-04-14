@@ -73,7 +73,7 @@ function App() {
             <Route path='projects' element={<Projects/>}/>
             <Route path='createproject' element={<CreateProject/>}/>
             <Route path='createticket' element={<CreateTicket/>}/>
-            <Route path='editticket' element={<EditTicket/>}/>
+            <Route path='editticket/:id' element={<EditTicket/>}/>
             <Route path='projectdetails/:id' element={<ProjectDetails/>}/>
             <Route path='ticketdetails/:id' element={<TicketDetails/>}/>
             <Route path='userprofile' element={<UserProfile/>}/>

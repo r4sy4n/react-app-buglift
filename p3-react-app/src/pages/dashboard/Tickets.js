@@ -102,7 +102,7 @@ const Tickets = () => {
                       <td>{ticket.ticketType}</td>
                       <td>{ticket.ticketStatus}</td>
                       <td>{ticket.ticketPriority}</td>
-                      <td><p onClick={() => handleDetail(ticket.id)}>Details</p></td>
+                      <td><p onClick={() => handleDetail(ticket.id)}>More Details</p></td>
                     </tr>
                   ))}
                 </tbody>

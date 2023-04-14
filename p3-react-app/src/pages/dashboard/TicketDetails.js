@@ -86,9 +86,8 @@ const TicketDetails = () => {
     e.preventDefault();
     navigate('/tickets');
   }
-  const handleEdit = (e) => {
-    e.preventDefault();
-    navigate('/editticket');
+  const handleEdit = (id) => {
+    navigate(`/editticket/${id}`);
   }
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -114,7 +113,8 @@ const TicketDetails = () => {
         <div className={showSidebar ? 'table' : 'table-move'}>
         <h3>Ticket Details</h3>
         <p onClick={handleDetail}><span>Back to list</span></p>
-        <p onClick={handleEdit}><span>Edit Ticket</span></p>
+        {tickets.filter(ticket => ticket.id === (id)).map((ticket, index) => (
+        <p key={index} onClick={() => handleEdit(ticket.id)}><span>Edit Ticket</span></p>))}
         <section className='grid-item'>
           {tickets.filter(ticket => ticket.id === (id)).map(ticket => (
             <div className='grid'>
@@ -135,8 +135,6 @@ const TicketDetails = () => {
                   <p>{ticket.ticketPriority}</p>
                   <h4>Ticket Status</h4>
                   <p>{ticket.ticketStatus}</p>
-                  <h4>Assign to</h4>
-                  <p>{ticket.title}</p>
               </div> 
             </div>
           ))}
