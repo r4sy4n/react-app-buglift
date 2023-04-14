@@ -6,6 +6,7 @@ import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AppContext } from '../../App';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const Wrapper = styled.section`
@@ -60,7 +61,7 @@ const CreateTicket = () => {
   const [priorityValues, setPriorityValues] = useState('High');
   const [statusValues, setStatusValues] = useState('Open');
   const [ticketTitle, setTicketTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [ticketDescription, setTicketDescription] = useState('');
   const [submittedBy, setSubmittedBy] = useState('');
   const {showSidebar} = useContext(SharedLayoutContext);
   const {tickets, setTickets} = useContext(AppContext);
@@ -74,7 +75,7 @@ const CreateTicket = () => {
     setTicketTitle(event.target.value);
   };
   const descriptionChange = (event) => {
-    setDescription(event.target.value);
+    setTicketDescription(event.target.value);
   };
   const submittedByChange = (event) => {
     setSubmittedBy(event.target.value);
@@ -90,10 +91,10 @@ const CreateTicket = () => {
   };
   const submitHandler = (event) =>{
     event.preventDefault();
-    if(!ticketTitle || !description || !submittedBy){
+    if(!ticketTitle || !ticketDescription || !submittedBy){
       toast.error('All fields are required!');
     }
-    if(ticketTitle && description && submittedBy){
+    if(ticketTitle && ticketDescription && submittedBy){
       addTicket();
       toast.success('Ticket Created');
       setTimeout(() =>{
@@ -104,10 +105,11 @@ const CreateTicket = () => {
   
   const addTicket = () => {
     let newEntry = {
-      // id: id,
+      id: uuidv4(),
       title: ticketTitle,
+      project: nameValues,
       submittedBy: submittedBy,
-      description: description,
+      ticketDescription: ticketDescription,
       ticketType: typeValues,
       ticketPriority: priorityValues,
       ticketStatus: statusValues,
@@ -142,7 +144,7 @@ const CreateTicket = () => {
           <textarea 
             type='text' 
             id='ticket-description' 
-            value={description} 
+            value={ticketDescription} 
             className='form-textarea'
             onChange={descriptionChange}></textarea>
           <div>

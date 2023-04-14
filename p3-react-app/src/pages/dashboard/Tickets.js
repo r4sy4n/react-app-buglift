@@ -71,7 +71,7 @@ const Tickets = () => {
     navigate('/createticket');   
   }
   const handleDetail = (id) => {
-    navigate(`/projectdetails/${id}`);
+    navigate(`/ticketdetails/${id}`);
   }
 
   return (    
@@ -85,6 +85,7 @@ const Tickets = () => {
                 <thead>
                   <tr>
                     <th>Title</th>
+                    <th>From Project</th>
                     <th>Submitted by</th>
                     <th>Ticket Type</th>
                     <th>Ticket Priority</th>
@@ -96,6 +97,7 @@ const Tickets = () => {
                   {tickets.map((ticket, index) => (
                     <tr key={index}>
                       <td>{ticket.title}</td>
+                      <td>{ticket.project}</td>
                       <td>{ticket.submittedBy}</td>
                       <td>{ticket.ticketType}</td>
                       <td>{ticket.ticketStatus}</td>

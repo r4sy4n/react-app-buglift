@@ -92,9 +92,9 @@ const Projects = () => {
                 <tbody>
                   {projects.map((project, index) => (
                     <tr key={index}>
-                      <td>{project.name}</td>
-                      <td>{project.description}</td>
-                      <td><p onClick={() => handleDetail(project.id)}>Details</p></td>
+                      {project.name && <td>{project.name}</td>}
+                      {project.description && <td>{project.description}</td>}
+                      {project.name && <td><p onClick={() => handleDetail(project.id)}>Details</p></td>}
                     </tr>
                   ))}
                 </tbody>

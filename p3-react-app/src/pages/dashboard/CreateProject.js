@@ -6,6 +6,7 @@ import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AppContext } from '../../App';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const Wrapper = styled.section`
@@ -85,7 +86,7 @@ const CreateProject = () => {
   
   const addProject = () => {
     let newEntry = {
-      // id: id,
+      id: uuidv4(),
       name: projectName,
       description: description
     }

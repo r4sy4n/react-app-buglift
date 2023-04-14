@@ -8,5 +8,6 @@ import SharedLayout from './SharedLayout';
 import UserProfile from './UserProfile';
 import Admin from './Admin'
 import ProjectDetails from './ProjectDetails';
+import TicketDetails from './TicketDetails';
 
-export { Dashboard, Tickets, Projects, EditTicket, CreateTicket, CreateProject, SharedLayout, UserProfile, Admin, ProjectDetails};
+export { Dashboard, Tickets, Projects, EditTicket, CreateTicket, CreateProject, SharedLayout, UserProfile, Admin, ProjectDetails, TicketDetails};

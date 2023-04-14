@@ -31,6 +31,7 @@ const Wrapper = styled.section`
   }
   span:hover {
   color: #E21818;
+  cursor: pointer;
   }
   .grid-item{
     margin-top: 3rem;
@@ -52,7 +53,7 @@ const ProjectDetails = () => {
         <h3>Project Details</h3>
         <span onClick={handleDetail}>Back to list</span>
         <section className='flex grid-item'>
-          {projects.filter(project => project.id === Number(id)).map(project => (
+          {projects.filter(project => project.id === (id)).map(project => (
             <div className='grid'>
               <div key={project.id}>
                   <h4>Project Name</h4>

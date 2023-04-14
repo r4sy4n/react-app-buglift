@@ -3,25 +3,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage, Register, ErrorPage} from './pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Dashboard, Tickets, Projects, CreateProject, CreateTicket, EditTicket, SharedLayout, UserProfile, Admin, ProjectDetails} from './pages/dashboard/';
+import {Dashboard, Tickets, Projects, CreateProject, CreateTicket, EditTicket, SharedLayout, UserProfile, Admin, ProjectDetails, TicketDetails} from './pages/dashboard/';
 import { createContext, useState } from 'react';
 export const AppContext = createContext();
 
 const initialProjects = [
   {
-    id: 1,
+    id: 'ab',
     name: "Project A",
     description: "This project aims to build a web application for managing inventory",
     detail: "",
   },
   {
-    id: 2,
+    id: 'cd',
     name: "Project B",
     description: "This project focuses on developing a machine learning algorithm for predicting customer churn",
     detail: "",
   },
   {
-    id: 3,
+    id: 'ef',
     name: "Project C",
     description: "This project involves building a mobile app for ordering food from local restaurants",
     detail: "",
@@ -29,24 +29,30 @@ const initialProjects = [
 ];
 const initialTicket = ([
     {
-      id: 1,
+      id: 'gh',
+      project: "Project 1",
       title: "Fix login page issue",
+      ticketDescription: "Please fi login page because it is not working when you are clicking submit",
       submittedBy: "John Smith",
       ticketType: "Bugs/Error",
       ticketStatus: "Open",
       ticketPriority: "High",
     },
     {
-      id: 2,
+      id: 'ij',
+      project: "Project 2",
       title: "Add new feature to dashboard",
+      ticketDescription: "Please add new chart feature when user opens the dashboard",
       submittedBy: "Mary Jones",
       ticketType: "Feature Request",
       ticketStatus: "In Progress",
       ticketPriority: "Medium",
     },
     {
-      id: 3,
+      id: 'kl',
+      project: "Project 3",
       title: "Update payment system",
+      ticketDescription: "Please implement gcash and paymaya to our payment system",
       submittedBy: "Alex Lee",
       ticketType: "Task",
       ticketStatus: "Closed",
@@ -69,6 +75,7 @@ function App() {
             <Route path='createticket' element={<CreateTicket/>}/>
             <Route path='editticket' element={<EditTicket/>}/>
             <Route path='projectdetails/:id' element={<ProjectDetails/>}/>
+            <Route path='ticketdetails/:id' element={<TicketDetails/>}/>
             <Route path='userprofile' element={<UserProfile/>}/>
             <Route path='admin' element={<Admin/>}/>
           </Route>
