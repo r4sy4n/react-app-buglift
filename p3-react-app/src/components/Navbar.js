@@ -18,13 +18,11 @@ const Wrapper = styled.nav`
   box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.1);
   width: 100%;
   position: fixed;
-  top: 0;
-  /* z-index: -1; */
+  top: 0;/
 
   .logo {
     display: flex;
     justify-content: center;
-    /* width: 100px; */
   }
   .nav-center {
     display: flex;
@@ -68,23 +66,18 @@ const Wrapper = styled.nav`
     margin-left: 0px;
     transition: 0.3s ease-in-out all;
   }
-  /* @media (max-width: 992px) {
-     position: sticky;
-     top: 0;
-  .nav-center {
-      width: 90%;
-    }} */
 `
 
 const Navbar = () => {
   const {showSidebar, setShowsidebar} = useContext(SharedLayoutContext);
   const [sidebar, setSidebar] = useState(false);
   const navigate = useNavigate();
-  // const hideSidebar = () => setSidebar(!sidebar);
+  
   const Logout = () => {
     toast.success('Logout Successful')
       setTimeout(() =>{
         navigate('/landing');  
+        localStorage.removeItem('name');
       }, 600);
   }
   return (

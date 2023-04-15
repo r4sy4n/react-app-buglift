@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { Banner } from '../components';
@@ -78,26 +78,35 @@ const Register = () => {
             event.preventDefault();  
         const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[!\@\-\#\$\.\%\&\*])(?=.*[a-zA-Z]).{8,}$/;          
         
-        if(regex.test(pwd) && pwd === confirmpwd && (isRegistered && name === '') && email !== ''){ // If all inputs are valid, clear error messages and show success message
-            if (email === 'admin@admin.com'){
+        
+        if(regex.test(pwd) && pwd === confirmpwd && (isRegistered && email === '') && name !== ''){ // If all inputs are valid, clear error messages and show success message
+            if (localStorage.getItem('name', name) === 'admin'){
                 setTimeout(() =>{
-                  navigate('/');  
+                  navigate('/'); 
                 }, 600);
-                }
+                setName('');
+                setEmail('');
+                setPassword('');
+                setConfirmpassword('');
+                toast.success('Login Successful!');
+            }else if (localStorage.getItem('name', name) !== 'admin' && localStorage.getItem('name', name) === name){
+                toast.error('Admin Only');
+            }
+            else if (localStorage.getItem('name', name) !== 'admin' && localStorage.getItem('name', name) !== name){
+                toast.error('Not Yet Registered');
+            }
             // setSuccessMessage('Login Successful!');
-            setName('');
-            setEmail('');
-            setPassword('');
-            setConfirmpassword('');
-            toast.success('Login Successful!');
+           
         }else if(regex.test(pwd) && pwd === confirmpwd && (!isRegistered && name !== '') && email !== ''){
             // setSuccessMessage('Registration Successful!');
             setName('');
             setEmail('');
             setPassword('');
             setConfirmpassword('');
+            localStorage.setItem('name', name);
             toast.success('Registration Successful!');
-        }else if((!isRegistered && name === '') || pwd === '' || confirmpwd === '' || email === ''){ // Validate username, password and confirm password field
+            setIsRegistered( !isRegistered )
+        }else if((!isRegistered && email === '') || pwd === '' || confirmpwd === '' || name === ''){ // Validate username, password and confirm password field
             // setSuccessMessage('All fields are required!');
             toast.error('All fields are required!');
         }else if(!regex.test(pwd)){ // Validate password
@@ -120,18 +129,18 @@ const Register = () => {
             <form onSubmit={ submitHandler } className='form'>
                 <Banner/>
                 <h3>{isRegistered ? 'Login' : 'Register'}</h3>
-                {!isRegistered && <label htmlFor='name' className='form-label'>Name</label>}
-                {!isRegistered && <input 
+                <label htmlFor='name' className='form-label'>Name</label>
+                <input 
                     type='text' 
                     id='name' 
                     value={ name } 
-                    onChange={ nameChangeHandler } className='form-input'></input>}
-                <label htmlFor='email' className='form-label'>Email</label>
-                <input 
+                    onChange={ nameChangeHandler } className='form-input'></input>
+                {!isRegistered && <label htmlFor='email' className='form-label'>Email</label>}
+                {!isRegistered && <input 
                     type='email' 
                     id='email' 
                     value={ email } 
-                    onChange={ emailChangeHandler } className='form-input'></input>
+                    onChange={ emailChangeHandler } className='form-input'></input>}
                 <label htmlFor='password' className='form-label'>Password</label>
                 <input 
                     type='password' 

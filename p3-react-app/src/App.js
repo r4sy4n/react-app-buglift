@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LandingPage, Register, ErrorPage} from './pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -63,22 +63,23 @@ const initialTicket = ([
 function App() {
   const [projects, setProjects] = useState(initialProjects);
   const [tickets, setTickets] = useState(initialTicket);
+  const isAuthenticated = localStorage.getItem('name'); 
   return (
     <AppContext.Provider value={{projects, setProjects, tickets, setTickets}}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<SharedLayout />}>
-            <Route index element={<Dashboard/>}/>
-            <Route path='tickets' element={<Tickets/>}/>
-            <Route path='projects' element={<Projects/>}/>
-            <Route path='createproject' element={<CreateProject/>}/>
-            <Route path='createticket' element={<CreateTicket/>}/>
-            <Route path='editticket/:id' element={<EditTicket/>}/>
-            <Route path='projectdetails/:id' element={<ProjectDetails/>}/>
-            <Route path='ticketdetails/:id' element={<TicketDetails/>}/>
-            <Route path='userprofile' element={<UserProfile/>}/>
-            <Route path='admin' element={<Admin/>}/>
-          </Route>
+            <Route path='/' element={isAuthenticated ? <SharedLayout /> : <Navigate to="/landing" />}>
+              <Route index element={<Dashboard/>}/>
+              <Route path='tickets' element={<Tickets/>}/>
+              <Route path='projects' element={<Projects/>}/>
+              <Route path='createproject' element={<CreateProject/>}/>
+              <Route path='createticket' element={<CreateTicket/>}/>
+              <Route path='editticket/:id' element={<EditTicket/>}/>
+              <Route path='projectdetails/:id' element={<ProjectDetails/>}/>
+              <Route path='ticketdetails/:id' element={<TicketDetails/>}/>
+              <Route path='userprofile' element={<UserProfile/>}/>
+              <Route path='admin' element={<Admin/>}/>
+            </Route>          
           <Route path='landing' element={<LandingPage />}/>
           <Route path='register' element={<Register />}/>
           <Route path='*' element={<ErrorPage />}/>
