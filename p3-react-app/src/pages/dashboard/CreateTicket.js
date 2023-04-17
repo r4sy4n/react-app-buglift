@@ -73,7 +73,7 @@ const reducer = (state, action) => {
 const CreateTicket = () => {
   const initialState = {
     projectName: ['Project 1', 'Project 2', 'Project 3'],
-    ticketType: ['Bugs/Feature', 'Feature request', 'Task'],
+    ticketType: ['Bugs/Error', 'Feature request', 'Task'],
     ticketPriority: ['Low', 'Medium', 'High'],
     ticketStatus: ['Open', 'In Progress', 'Closed'],
     nameValues: 'Project 1',

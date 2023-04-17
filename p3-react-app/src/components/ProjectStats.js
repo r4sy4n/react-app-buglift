@@ -6,10 +6,8 @@ const Wrapper = styled.section`
     background:#fff;
     border-radius: 0.25rem;
     text-align: center;
-    border: 2px solid yellow;
+    border: 2px solid #F99417;
 `
-
-
 
 const ProjectStats = () => {
   return (

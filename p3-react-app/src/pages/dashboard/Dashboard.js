@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import { BarChartData, ProjectStats, TicketStats, PriorityChart } from '../../components';
+import { BarChartData, ProjectStats, TicketStats, PriorityChart, TypeChart, StatusChart } from '../../components';
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -20,6 +20,12 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
  }
+ .grid-chart{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+  margin-top: 4rem;
+ }
 `
 
 const Dashboard = () => {
@@ -32,9 +38,11 @@ const Dashboard = () => {
         </div>
       </section>
       <section>
-        <div>
+        <div className='grid-chart'>
           <BarChartData/>
+          <TypeChart/>
           <PriorityChart/>
+          <StatusChart/>
         </div>
       </section>
     </Wrapper>

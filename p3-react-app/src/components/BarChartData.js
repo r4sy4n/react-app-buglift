@@ -14,7 +14,8 @@ const BarChartData = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="value" fill="#8884d8" />
+        <Bar dataKey="value" fill="#187498" />
+        <text x="300" y="30" textAnchor="middle" dominantBaseline="middle">Total Projects and Tickets</text>
       </BarChart>
   );
   }

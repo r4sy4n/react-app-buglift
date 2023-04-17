@@ -6,10 +6,8 @@ const Wrapper = styled.section`
     background:#fff;
     border-radius: 0.25rem;
     text-align: center;
-    border: 2px solid blue;
+    border: 2px solid #5D3891;
 `
-
-
 
 const TicketStats = () => {
   return (

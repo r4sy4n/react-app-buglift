@@ -7,6 +7,8 @@ import BarChartData from './BarChartData';
 import ProjectStats from './ProjectStats';
 import TicketStats from './TicketStats';
 import PriorityChart from './PriorityChart';
+import TypeChart from './TypeChart';
+import StatusChart from './StatusChart';
 
 
-export {Navbar, Sidebar, Smallsidebar, Banner, Logo, BarChartData, ProjectStats, TicketStats, PriorityChart};
+export {Navbar, Sidebar, Smallsidebar, Banner, Logo, BarChartData, ProjectStats, TicketStats, PriorityChart, TypeChart, StatusChart};
