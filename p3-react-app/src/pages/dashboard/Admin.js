@@ -1,7 +1,8 @@
-import React, { useContext }from 'react';
+import React, { useContext, useReducer }from 'react';
 import styled from 'styled-components';
 import { SharedLayoutContext } from './SharedLayout';
-
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -37,18 +38,65 @@ const Wrapper = styled.section`
     transition: 0.3s ease-in-out all;
   }
 `
-
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_PROJECT_LIST':
+      return {
+        ...state,
+        projectList: action.payload,
+      };
+    case 'SET_ASSIGN_PROJECT':
+      return {
+        ...state,
+        assignProject: action.payload,
+      };
+    case 'SET_ASSIGN_USERS':
+      return {
+        ...state,
+        assignUsers: action.payload,
+      };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+};
 const Admin = () => {
   const assignProject = ['Manager', 'Project Manager', 'User'];
   const projectList = ['Project 1', 'Project 2', 'Project 3' ];
   const userList = ['John Smith', 'Mary Jones', 'Alex Lee'];
-
   const { showSidebar } = useContext(SharedLayoutContext);
+  const navigate = useNavigate();
+
+  const [state, dispatch] = useReducer(reducer, {
+    projectList: 'Project 1',
+    assignProject: '',
+    assignUsers: '',
+  });
+
+
+  const listChange = (event) => {
+    dispatch({ type: 'SET_PROJECT_LIST', payload: event.target.value });
+  };
+
+  const projectChange = (event) => {
+    dispatch({ type: 'SET_ASSIGN_PROJECT', payload: event.target.value });
+  };
+
+  const userChange = (event) => {
+    dispatch({ type: 'SET_ASSIGN_USERS', payload: event.target.value });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    toast.success('Save Changes');
+    setTimeout(() => {
+      navigate('/');
+    }, 600);
+  };
 
 
   return (
     <Wrapper>
-      <form className={showSidebar ? 'form' : 'form-move'}
+      <form className={showSidebar ? 'form' : 'form-move'} onSubmit={submitHandler}
         >    
           <h3>Admin Page</h3>
           <p>Manage Users</p>
@@ -56,8 +104,8 @@ const Admin = () => {
             <div className='form-label'>Project List</div>
             <select
               className='form-select'
-              value={''}
-              // onChange={handleChange}
+              value={state.projectList}
+              onChange={listChange}
             >
               {projectList.map((project, index) => (
                 <option key={index} value={project}>
@@ -68,8 +116,8 @@ const Admin = () => {
             <div className='form-label'>Assign Project</div>
             <select
               className='form-select'
-              value={''}
-              // onChange={handleChange}
+              value={state.assignProject}
+              onChange={projectChange}
             >
               {assignProject.map((project, index) => (
                 <option key={index} value={project}>
@@ -80,8 +128,8 @@ const Admin = () => {
             <div className='form-label'>Assign Users</div>
             <select
               className='form-select'
-              value={''}
-              // onChange={handleChange}
+              value={state.assignUsers}
+              onChange={userChange}
             >
               {userList.map((user, index) => (
                 <option key={index} value={user}>

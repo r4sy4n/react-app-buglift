@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components'
 import { BarChartData, ProjectStats, TicketStats, PriorityChart, TypeChart, StatusChart } from '../../components';
+import { SharedLayoutContext } from './SharedLayout';
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -26,11 +27,32 @@ const Wrapper = styled.section`
   column-gap: 2rem;
   margin-top: 4rem;
  }
+.form {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  max-width: 75vw;
+  transition: 0.3s ease-in-out all;
+  /* width: 100%; */
+}
+.form-move{
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  width: 90vw;
+  background: #fff;  
+  transition: 0.3s ease-in-out all;
+}
 `
 
 const Dashboard = () => {
+  const { showSidebar } = useContext(SharedLayoutContext);
+
   return (
     <Wrapper>
+      <div className={showSidebar ? 'form' : 'form-move'}>
       <section className='flex'>
         <div className='grid'>
           <ProjectStats/>
@@ -45,6 +67,7 @@ const Dashboard = () => {
           <StatusChart/>
         </div>
       </section>
+      </div>
     </Wrapper>
   );
 };

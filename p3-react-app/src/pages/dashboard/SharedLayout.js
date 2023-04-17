@@ -18,7 +18,6 @@ const Wrapper = styled.section`
       left: 280px;
       transition: 0.3s ease-in-out all;
     }
-  /* } */
     .hide{
       margin-left: -250px;
       /* display: none; */
