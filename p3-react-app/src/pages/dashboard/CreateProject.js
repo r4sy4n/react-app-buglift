@@ -68,6 +68,7 @@ const reducer = (state, action) => {
       throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
+
 const CreateProject = () => {
   const projectUser = ['Manager', 'Project Manager', 'User'];
 

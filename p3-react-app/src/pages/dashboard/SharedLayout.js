@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import {Navbar, Sidebar, Smallsidebar} from '../../components/index';
 import styled from 'styled-components';
 export const SharedLayoutContext = createContext();
@@ -37,10 +37,11 @@ const Wrapper = styled.section`
 const SharedLayout = () => {
   const [showSidebar, setShowsidebar] = useState(true);
   const isAuthenticated = localStorage.getItem('name'); 
+  const navigate = useNavigate();
 
   useEffect(() => {
   if(!isAuthenticated){ 
-    Navigate('/landing'); 
+    navigate('/landing'); 
     }
   }, []);
   
