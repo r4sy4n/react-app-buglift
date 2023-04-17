@@ -1,33 +1,22 @@
-import { useState, createContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useState, createContext, useEffect } from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
 import {Navbar, Sidebar, Smallsidebar} from '../../components/index';
 import styled from 'styled-components';
 export const SharedLayoutContext = createContext();
 
 const Wrapper = styled.section`
-  /* .dashboard {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  .dashboard-page {
-    width: 90vw;
-    margin: 0 auto;
-    padding: 2rem 0;
-  } */
-  /* @media (min-width: 992px) { */
+  
     .dashboard {
       display: grid;
       grid-template-columns: 1fr;
     }
     .dashboard-page {
-      /* width: 90%; */
-      /* width: 90vw; */
-    margin: 0 auto;
-    padding: 2rem 0;
-    position: absolute;
-    top: 6.5rem;
-    left: 280px;
-    transition: 0.3s ease-in-out all;
+      margin: 0 auto;
+      padding: 2rem 0;
+      position: absolute;
+      top: 6.5rem;
+      left: 280px;
+      transition: 0.3s ease-in-out all;
     }
   /* } */
     .hide{
@@ -47,6 +36,13 @@ const Wrapper = styled.section`
 
 const SharedLayout = () => {
   const [showSidebar, setShowsidebar] = useState(true);
+  const isAuthenticated = localStorage.getItem('name'); 
+
+  useEffect(() => {
+  if(!isAuthenticated){ 
+    Navigate('/landing'); 
+    }
+  }, []);
   
   return (
     <SharedLayoutContext.Provider value={{showSidebar, setShowsidebar}}>

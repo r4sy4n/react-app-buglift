@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import React from 'react';
+import React, { useReducer, useContext } from 'react';
 import styled from 'styled-components';
-import { useContext } from 'react';
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AppContext } from '../../App';
 import { v4 as uuidv4 } from 'uuid';
+
 
 
 const Wrapper = styled.section`
@@ -50,69 +49,99 @@ const Wrapper = styled.section`
     transition: 0.3s ease-in-out all;
   }
 `
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_NAME_VALUES':
+      return { ...state, nameValues: action.payload };
+    case 'SET_TYPE_VALUES':
+      return { ...state, typeValues: action.payload };
+    case 'SET_PRIORITY_VALUES':
+      return { ...state, priorityValues: action.payload };
+    case 'SET_STATUS_VALUES':
+      return { ...state, statusValues: action.payload };
+    case 'SET_TICKET_TITLE':
+      return { ...state, ticketTitle: action.payload };
+    case 'SET_TICKET_DESCRIPTION':
+      return { ...state, ticketDescription: action.payload };
+    case 'SET_SUBMITTED_BY':
+      return { ...state, submittedBy: action.payload };
+    default:
+      throw new Error();
+  }
+};
 
 const CreateTicket = () => {
-  const projectName = ['Project 1', 'Project 2', 'Project 3'];
-  const ticketType = ['Bugs/Feature', 'Feature request', 'Task'];
-  const ticketPriority = ['Low', 'Medium', 'High'];
-  const ticketStatus = ['Open', 'In Progress', 'Closed'];
-  const [nameValues, setNameValues] = useState('Project 1');
-  const [typeValues, setTypeValues] = useState('Bugs/Feature');
-  const [priorityValues, setPriorityValues] = useState('High');
-  const [statusValues, setStatusValues] = useState('Open');
-  const [ticketTitle, setTicketTitle] = useState('');
-  const [ticketDescription, setTicketDescription] = useState('');
-  const [submittedBy, setSubmittedBy] = useState('');
+  const initialState = {
+    projectName: ['Project 1', 'Project 2', 'Project 3'],
+    ticketType: ['Bugs/Feature', 'Feature request', 'Task'],
+    ticketPriority: ['Low', 'Medium', 'High'],
+    ticketStatus: ['Open', 'In Progress', 'Closed'],
+    nameValues: 'Project 1',
+    typeValues: 'Bugs/Feature',
+    priorityValues: 'High',
+    statusValues: 'Open',
+    ticketTitle: '',
+    ticketDescription: '',
+    submittedBy: '',
+  };
   const {showSidebar} = useContext(SharedLayoutContext);
   const {tickets, setTickets} = useContext(AppContext);
   const navigate = useNavigate();
   // const {id} = useParams();
 
+ const [state, dispatch] = useReducer(reducer, initialState);
+
   const handleChange = (event) => {
-    setNameValues(event.target.value);
+    dispatch({ type: 'SET_NAME_VALUES', payload: event.target.value });
   };
+
   const ticketChange = (event) => {
-    setTicketTitle(event.target.value);
+    dispatch({ type: 'SET_TICKET_TITLE', payload: event.target.value });
   };
+
   const descriptionChange = (event) => {
-    setTicketDescription(event.target.value);
+    dispatch({ type: 'SET_TICKET_DESCRIPTION', payload: event.target.value });
   };
+
   const submittedByChange = (event) => {
-    setSubmittedBy(event.target.value);
-  }
+    dispatch({ type: 'SET_SUBMITTED_BY', payload: event.target.value });
+  };
+
   const typeChange = (event) => {
-    setTypeValues(event.target.value);
+    dispatch({ type: 'SET_TYPE_VALUES', payload: event.target.value });
   };
+
   const priorityChange = (event) => {
-    setPriorityValues(event.target.value);
+    dispatch({ type: 'SET_PRIORITY_VALUES', payload: event.target.value });
   };
+
   const statusChange = (event) => {
-    setStatusValues(event.target.value);
+    dispatch({ type: 'SET_STATUS_VALUES', payload: event.target.value });
   };
-  const submitHandler = (event) =>{
+  const submitHandler = (event) => {
     event.preventDefault();
-    if(!ticketTitle || !ticketDescription || !submittedBy){
+    if (!state.ticketTitle || !state.ticketDescription || !state.submittedBy) {
       toast.error('All fields are required!');
     }
-    if(ticketTitle && ticketDescription && submittedBy){
+    if (state.ticketTitle && state.ticketDescription && state.submittedBy) {
       addTicket();
       toast.success('Ticket Created');
-      setTimeout(() =>{
-        navigate('/tickets');  
+      setTimeout(() => {
+        navigate('/tickets');
       }, 600);
     }
-  }
+  };
   
   const addTicket = () => {
     let newEntry = {
       id: uuidv4(),
-      title: ticketTitle,
-      project: nameValues,
-      submittedBy: submittedBy,
-      ticketDescription: ticketDescription,
-      ticketType: typeValues,
-      ticketPriority: priorityValues,
-      ticketStatus: statusValues,
+      title: state.ticketTitle,
+      project: state.nameValues,
+      submittedBy: state.submittedBy,
+      ticketDescription: state.ticketDescription,
+      ticketType: state.typeValues,
+      ticketPriority: state.priorityValues,
+      ticketStatus: state.statusValues,
       Details: '',
     }
     setTickets ([
@@ -127,9 +156,9 @@ const CreateTicket = () => {
         <div className='form-center'>
           <div>
             <div className='form-label'>Project Name</div>
-              <select className='form-select' value={nameValues} onChange={handleChange}>
+              <select className='form-select' value={state.nameValues} onChange={handleChange}>
                 {
-                  projectName.map((project, index) =><option key={index} value={project}>{project}</option>)
+                  state.projectName.map((project, index) =><option key={index} value={project}>{project}</option>)
                 }        
               </select>
           </div>
@@ -137,37 +166,37 @@ const CreateTicket = () => {
           <input 
             type='text' 
             id='ticket-title' 
-            value={ticketTitle}  
+            value={state.ticketTitle}  
             className='form-input'
             onChange={ ticketChange }></input>
           <label htmlFor='ticket-description' className='form-label'>Description</label>
           <textarea 
             type='text' 
             id='ticket-description' 
-            value={ticketDescription} 
+            value={state.ticketDescription} 
             className='form-textarea'
             onChange={descriptionChange}></textarea>
           <div>
             <div className='form-label'>Ticket Type</div>
-            <select className='form-select' value={typeValues} onChange={typeChange}>
+            <select className='form-select' value={state.typeValues} onChange={typeChange}>
               {
-                ticketType.map((type, index) =><option key={index} value={type}>{type}</option>)
+                state.ticketType.map((type, index) =><option key={index} value={type}>{type}</option>)
               }        
             </select>
           </div>
           <div>
             <div className='form-label'>Ticket Priority</div>
-            <select className='form-select' value={priorityValues} onChange={priorityChange}>
+            <select className='form-select' value={state.priorityValues} onChange={priorityChange}>
               {
-                ticketPriority.map((priority, index) =><option key={index} value={priority}>{priority}</option>)
+                state.ticketPriority.map((priority, index) =><option key={index} value={priority}>{priority}</option>)
               }        
             </select>
           </div>
           <div>
             <div className='form-label'>Ticket Status</div>
-            <select className='form-select' value={statusValues} onChange={statusChange}>
+            <select className='form-select' value={state.statusValues} onChange={statusChange}>
               {
-                ticketStatus.map((status, index) =><option key={index} value={status}>{status}</option>)
+                state.ticketStatus.map((status, index) =><option key={index} value={status}>{status}</option>)
               }        
             </select>
           </div>
@@ -175,7 +204,7 @@ const CreateTicket = () => {
           <input 
             type='text' 
             id='submitted-by' 
-            value={submittedBy}  
+            value={state.submittedBy}  
             className='form-input'
             onChange={ submittedByChange }></input>
           <button type='submit' className='btn btn-block'>Create Ticket</button>  

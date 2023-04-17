@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage, Register, ErrorPage} from './pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,7 +32,7 @@ const initialTicket = ([
       id: 'gh',
       project: "Project 1",
       title: "Fix login page issue",
-      ticketDescription: "Please fi login page because it is not working when you are clicking submit",
+      ticketDescription: "Please fix login page because it is not working when you are clicking submit",
       submittedBy: "John Smith",
       ticketType: "Bugs/Error",
       ticketStatus: "Open",
@@ -63,12 +63,12 @@ const initialTicket = ([
 function App() {
   const [projects, setProjects] = useState(initialProjects);
   const [tickets, setTickets] = useState(initialTicket);
-  const isAuthenticated = localStorage.getItem('name'); 
+ 
   return (
     <AppContext.Provider value={{projects, setProjects, tickets, setTickets}}>
       <BrowserRouter>
         <Routes>
-            <Route path='/' element={isAuthenticated ? <SharedLayout /> : <Navigate to="/landing" />}>
+            <Route path='/' element={<SharedLayout />}>
               <Route index element={<Dashboard/>}/>
               <Route path='tickets' element={<Tickets/>}/>
               <Route path='projects' element={<Projects/>}/>
