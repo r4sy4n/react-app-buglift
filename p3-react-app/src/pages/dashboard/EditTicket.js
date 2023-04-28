@@ -6,8 +6,6 @@ import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AppContext } from '../../App';
-import { v4 as uuidv4 } from 'uuid';
-
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -67,10 +65,11 @@ const Wrapper = styled.section`
 `
 
 const EditTicket = () => {
-  const projectName = ['Project 1', 'Project 2', 'Project 3'];
-  const ticketType = ['Bugs/Feature', 'Feature request', 'Task'];
+  const {projects} = useContext(AppContext);
+  const projectName = projects;
+  const ticketType = ['Bugs/Error', 'Feature Request', 'Task'];
   const ticketPriority = ['Low', 'Medium', 'High'];
-  const ticketStatus = ['Open', 'In Progress', 'Closed'];
+  const ticketStatus = ['Open', 'In Progress', 'Completed'];
   const {showSidebar} = useContext(SharedLayoutContext);
   const {tickets, setTickets} = useContext(AppContext);
   const navigate = useNavigate();
@@ -167,7 +166,7 @@ const EditTicket = () => {
             <div className='form-label'>Project Name</div>
               <select className='form-select' value={nameValues} onChange={handleChange} disabled>
                 {
-                  projectName.map((project, index) =><option key={index} value={project}>{project}</option>)
+                  projectName.map((project, index) =><option key={index} value={project.name}>{project.name}</option>)
                 }        
               </select>
           </div>

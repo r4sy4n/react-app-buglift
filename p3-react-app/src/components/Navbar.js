@@ -90,7 +90,7 @@ const Navbar = () => {
             <GiHamburgerMenu />
           </button>
             <Banner />
-          <Link to='createticket' className='btn'>New Ticket</Link>
+          {/* <Link to='createticket' className='btn'>New Ticket</Link> */}
           <button type='button' className='logout-btn' onClick={Logout}>
             <SlLogout/>
           </button>

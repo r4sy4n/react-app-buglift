@@ -72,6 +72,14 @@ const Wrapper = styled.section`
   background: #fff;  
   transition: 0.3s ease-in-out all;
 }
+span{
+  text-decoration: underline;
+  color: blue;
+}
+span:hover {
+  color: #E21818;
+  cursor: pointer;
+}
 `
 const TicketDetails = () => {
   const {tickets} = useContext(AppContext);
@@ -171,15 +179,15 @@ const TicketDetails = () => {
                     className='form-textarea'
                     onChange={handleCommentChange} required
                     ></textarea>
-                <label htmlFor="commenter" className='form-label'>Commenter: </label>
-                <input type="text" id="commenter" value={commenter} className='form-input' onChange={handleCommenterChange} required />
+                {/* <label htmlFor="commenter" className='form-label'>Commenter: </label>
+                <input type="text" id="commenter" value={commenter} className='form-input' onChange={handleCommenterChange} required /> */}
                 <button type='submit' className='btn btn-block' >Add</button>
             </form>
                 <h3>Messages</h3>
             <table>
                 <thead>
                   <tr>
-                    <th>Commenter</th>
+                    {/* <th>Commenter</th> */}
                     <th>Message</th>
                     <th>Date Created</th>
                   </tr>
@@ -187,7 +195,7 @@ const TicketDetails = () => {
                 <tbody>
                     {comments.map((comment, index) => (
                         <tr key={index}>
-                        <td>{comment.commenter}</td>
+                        {/* <td>{comment.commenter}</td> */}
                         <td>{comment.text}</td>
                         <td>{comment.date}</td>
                         </tr>

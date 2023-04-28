@@ -60,6 +60,7 @@ p {
 }
 p:hover {
   color: #E21818;
+  cursor: pointer;
 }
 `
 

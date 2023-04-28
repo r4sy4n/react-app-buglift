@@ -55,7 +55,7 @@ const initialTicket = ([
       ticketDescription: "Please implement gcash and paymaya to our payment system",
       submittedBy: "Alex Lee",
       ticketType: "Task",
-      ticketStatus: "Closed",
+      ticketStatus: "Completed",
       ticketPriority: "Low",
     },
   ]);

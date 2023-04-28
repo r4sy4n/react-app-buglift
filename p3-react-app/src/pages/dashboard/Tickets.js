@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { useContext } from 'react';
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from "../../App";
@@ -60,6 +59,16 @@ p {
 }
 p:hover {
   color: #E21818;
+  cursor: pointer;
+}
+.sort-container{
+  margin-top: 3rem;
+}
+.drop-select {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    background: #f0f4f8;
+    border: 1px solid #bcccdc;
 }
 `
 
@@ -75,7 +84,20 @@ const Tickets = () => {
   const handleDetail = (id) => {
     navigate(`/ticketdetails/${id}`);
   }
-
+  const [sortOption, setSortOption] = useState('All');
+  
+  const filteredTickets = tickets.filter(ticket => {
+     if (sortOption === 'All') {
+      return true;
+    } else {
+      return ticket.ticketStatus === sortOption;
+    }
+  });
+  console.log(sortOption)
+  const handleSortOptionChange = (e) => {
+    setSortOption(e.target.value);
+    
+  }
   return (    
       <Wrapper>
         <form className={showSidebar ? 'table' : 'table-move'}>
@@ -83,6 +105,15 @@ const Tickets = () => {
             <div className="project-table form-center">
               <h3>Ticket List</h3>
               <span>All the tickets you have</span>
+               <div className="sort-container">
+                <label htmlFor="sortOption" className='form-label'>Sort By Status</label>
+                <select id="sortOption" value={sortOption} className='drop-select' onChange={handleSortOptionChange}>
+                  <option value="All">All</option>
+                  <option value="Open">Open</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
               <table>
                 <thead>
                   <tr>
@@ -90,13 +121,13 @@ const Tickets = () => {
                     <th>From Project</th>
                     <th>Submitted by</th>
                     <th>Ticket Type</th>
-                    <th>Ticket Priority</th>
                     <th>Ticket Status</th>
+                    <th>Ticket Priority</th>
                     <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {tickets.map((ticket, index) => (
+                  {filteredTickets.map((ticket, index) => (
                     <tr key={index}>
                       <td>{ticket.title}</td>
                       <td>{ticket.project}</td>

@@ -81,7 +81,7 @@ const CreateTicket = () => {
     projectName: projects,
     ticketType: ['Bugs/Error', 'Feature Request', 'Task'],
     ticketPriority: ['Low', 'Medium', 'High'],
-    ticketStatus: ['Open', 'In Progress', 'Closed'],
+    ticketStatus: ['Open'],
     nameValues: 'Project 1',
     typeValues: 'Bugs/Error',
     priorityValues: 'High',
@@ -197,7 +197,7 @@ const CreateTicket = () => {
           </div>
           <div>
             <div className='form-label'>Ticket Status</div>
-            <select className='form-select' value={state.statusValues} onChange={statusChange} disabled>
+            <select className='form-select' value={state.statusValues} onChange={statusChange}>
               {
                 state.ticketStatus.map((status, index) =><option key={index} value={status}>{status}</option>)
               }        

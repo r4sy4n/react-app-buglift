@@ -5,7 +5,7 @@ const StatusChart = ({tickets}) => {
   const data = [
   { name: 'Open', value: tickets.filter(ticket => ticket.ticketStatus === 'Open').length },
   { name: 'In Progress', value: tickets.filter(ticket => ticket.ticketStatus === 'In Progress').length },
-  { name: 'Closed', value: tickets.filter(ticket => ticket.ticketStatus === 'Closed').length },
+  { name: 'Completed', value: tickets.filter(ticket => ticket.ticketStatus === 'Completed').length },
 ];
 
   return (
