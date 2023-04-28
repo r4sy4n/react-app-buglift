@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components'
 import { BarChartData, ProjectStats, TicketStats, PriorityChart, TypeChart, StatusChart } from '../../components';
 import { SharedLayoutContext } from './SharedLayout';
+import { AppContext } from '../../App';
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -49,22 +50,25 @@ const Wrapper = styled.section`
 
 const Dashboard = () => {
   const { showSidebar } = useContext(SharedLayoutContext);
+  const {tickets} = useContext(AppContext);
+  const {projects} = useContext(AppContext);
+  
 
   return (
     <Wrapper>
       <div className={showSidebar ? 'form' : 'form-move'}>
       <section className='flex'>
         <div className='grid'>
-          <ProjectStats/>
-          <TicketStats/>
+          <ProjectStats projects={projects}/>
+          <TicketStats tickets={tickets}/>
         </div>
       </section>
       <section>
         <div className='grid-chart'>
-          <BarChartData/>
-          <TypeChart/>
-          <PriorityChart/>
-          <StatusChart/>
+          <BarChartData tickets={tickets} projects={projects}/>
+          <TypeChart tickets={tickets}/>
+          <PriorityChart tickets={tickets}/>
+          <StatusChart tickets={tickets}/>
         </div>
       </section>
       </div>

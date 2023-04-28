@@ -9,10 +9,10 @@ const Wrapper = styled.section`
     border: 2px solid #F99417;
 `
 
-const ProjectStats = () => {
+const ProjectStats = ({projects}) => {
   return (
     <Wrapper>
-        <h1>9</h1>
+        <h1>{projects.length}</h1>
         <h3>Active Projects</h3>
     </Wrapper>
   )

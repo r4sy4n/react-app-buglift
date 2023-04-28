@@ -1,13 +1,13 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const data = [
-  { name: 'Open', value: 12 },
-  { name: 'In Progress', value: 26 },
-  { name: 'Closed', value: 10 },
+const StatusChart = ({tickets}) => {
+  const data = [
+  { name: 'Open', value: tickets.filter(ticket => ticket.ticketStatus === 'Open').length },
+  { name: 'In Progress', value: tickets.filter(ticket => ticket.ticketStatus === 'In Progress').length },
+  { name: 'Closed', value: tickets.filter(ticket => ticket.ticketStatus === 'Closed').length },
 ];
 
-const StatusChart = () => {
   return (
      <BarChart width={600} height={300} data={data}>
       <CartesianGrid strokeDasharray="3 3" />

@@ -79,7 +79,7 @@ const Register = () => {
         const regex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[!\@\-\#\$\.\%\&\*])(?=.*[a-zA-Z]).{8,}$/;          
         
         
-        if(regex.test(pwd) && pwd === confirmpwd && (isRegistered && email === '') && name !== ''){ // If all inputs are valid, clear error messages and show success message
+        if(regex.test(pwd) && (isRegistered && email === '' && confirmpwd === '') && name !== ''){ // If all inputs are valid, clear error messages and show success message
             if (localStorage.getItem('name', name) === 'admin'){
                 setTimeout(() =>{
                   navigate('/'); 
@@ -148,12 +148,12 @@ const Register = () => {
                     value={ pwd }
                     onChange={ passwordChangeHandler } className='form-input'></input>
                 {<p>{pwdError}</p>}
-                <label htmlFor='confirmpassword' className='form-label'>Confirm Password</label>
-                <input 
+                {!isRegistered && <label htmlFor='confirmpassword' className='form-label'>Confirm Password</label>}
+                {!isRegistered && <input 
                     type='password' 
                     id='confirmpassword' 
                     value={ confirmpwd }
-                    onChange={ confirmPasswordChangeHandler } className='form-input'></input>
+                    onChange={ confirmPasswordChangeHandler } className='form-input'></input>}
                 {<p>{confirmPwdError}</p>}
                 <div>
                     {<p>{successMessage}</p>}

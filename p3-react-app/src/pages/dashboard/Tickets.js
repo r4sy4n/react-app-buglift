@@ -55,6 +55,8 @@ th {
 p {
   display: inline-block;
   margin-top: 18px;
+  text-decoration: underline;
+  color: blue;
 }
 p:hover {
   color: #E21818;

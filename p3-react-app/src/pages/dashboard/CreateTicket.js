@@ -71,25 +71,28 @@ const reducer = (state, action) => {
 };
 
 const CreateTicket = () => {
+  const {showSidebar} = useContext(SharedLayoutContext);
+  const {tickets, setTickets} = useContext(AppContext);
+  const {projects} = useContext(AppContext);
+  
+  const navigate = useNavigate();
+ 
   const initialState = {
-    projectName: ['Project 1', 'Project 2', 'Project 3'],
-    ticketType: ['Bugs/Error', 'Feature request', 'Task'],
+    projectName: projects,
+    ticketType: ['Bugs/Error', 'Feature Request', 'Task'],
     ticketPriority: ['Low', 'Medium', 'High'],
     ticketStatus: ['Open', 'In Progress', 'Closed'],
     nameValues: 'Project 1',
-    typeValues: 'Bugs/Feature',
+    typeValues: 'Bugs/Error',
     priorityValues: 'High',
     statusValues: 'Open',
     ticketTitle: '',
     ticketDescription: '',
-    submittedBy: '',
+    submittedBy: 'Admin',
   };
-  const {showSidebar} = useContext(SharedLayoutContext);
-  const {tickets, setTickets} = useContext(AppContext);
-  const navigate = useNavigate();
   // const {id} = useParams();
 
- const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChange = (event) => {
     dispatch({ type: 'SET_NAME_VALUES', payload: event.target.value });
@@ -158,7 +161,7 @@ const CreateTicket = () => {
             <div className='form-label'>Project Name</div>
               <select className='form-select' value={state.nameValues} onChange={handleChange}>
                 {
-                  state.projectName.map((project, index) =><option key={index} value={project}>{project}</option>)
+                  state.projectName.map((project, index) =><option key={index} value={project.name}>{project.name}</option>)
                 }        
               </select>
           </div>
@@ -194,7 +197,7 @@ const CreateTicket = () => {
           </div>
           <div>
             <div className='form-label'>Ticket Status</div>
-            <select className='form-select' value={state.statusValues} onChange={statusChange}>
+            <select className='form-select' value={state.statusValues} onChange={statusChange} disabled>
               {
                 state.ticketStatus.map((status, index) =><option key={index} value={status}>{status}</option>)
               }        
@@ -206,7 +209,7 @@ const CreateTicket = () => {
             id='submitted-by' 
             value={state.submittedBy}  
             className='form-input'
-            onChange={ submittedByChange }></input>
+            onChange={ submittedByChange } disabled></input>
           <button type='submit' className='btn btn-block'>Create Ticket</button>  
         </div>
       </form>

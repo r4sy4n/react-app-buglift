@@ -30,7 +30,7 @@ const initialProjects = [
 const initialTicket = ([
     {
       id: 'gh',
-      project: "Project 1",
+      project: "Project A",
       title: "Fix login page issue",
       ticketDescription: "Please fix login page because it is not working when you are clicking submit",
       submittedBy: "John Smith",
@@ -40,7 +40,7 @@ const initialTicket = ([
     },
     {
       id: 'ij',
-      project: "Project 2",
+      project: "Project B",
       title: "Add new feature to dashboard",
       ticketDescription: "Please add new chart feature when user opens the dashboard",
       submittedBy: "Mary Jones",
@@ -50,7 +50,7 @@ const initialTicket = ([
     },
     {
       id: 'kl',
-      project: "Project 3",
+      project: "Project C",
       title: "Update payment system",
       ticketDescription: "Please implement gcash and paymaya to our payment system",
       submittedBy: "Alex Lee",
