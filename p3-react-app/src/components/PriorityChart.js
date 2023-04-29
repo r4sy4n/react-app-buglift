@@ -16,7 +16,7 @@ const PriorityChart = ({tickets}) => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="value" fill="#EB5353" />
+      <Bar dataKey="value" fill="#E21818" />
       <text x="300" y="30" textAnchor="middle" dominantBaseline="middle">Tickets by Priority</text>
     </BarChart>
   );

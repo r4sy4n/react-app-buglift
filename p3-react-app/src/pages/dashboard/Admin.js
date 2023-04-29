@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { SharedLayoutContext } from './SharedLayout';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../App';
+
+
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -60,14 +63,17 @@ const reducer = (state, action) => {
   }
 };
 const Admin = () => {
+  const {projects} = useContext(AppContext);
+
+
   const assignProject = ['Manager', 'Project Manager', 'User'];
-  const projectList = ['Project 1', 'Project 2', 'Project 3' ];
+  const projectList = projects;
   const userList = ['John Smith', 'Mary Jones', 'Alex Lee'];
   const { showSidebar } = useContext(SharedLayoutContext);
   const navigate = useNavigate();
 
   const [state, dispatch] = useReducer(reducer, {
-    projectList: 'Project 1',
+    projectList: '',
     assignProject: '',
     assignUsers: '',
   });
@@ -108,8 +114,8 @@ const Admin = () => {
               onChange={listChange}
             >
               {projectList.map((project, index) => (
-                <option key={index} value={project}>
-                  {project}
+                <option key={index} value={project.name}>
+                  {project.name}
                 </option>
               ))}
             </select>

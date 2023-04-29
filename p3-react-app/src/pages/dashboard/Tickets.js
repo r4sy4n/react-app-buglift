@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from "../../App";
+import { Badge } from 'react-bootstrap';
+
 
 const Wrapper = styled.section`
   border-radius: 0.25rem;
@@ -98,6 +100,18 @@ const Tickets = () => {
     setSortOption(e.target.value);
     
   }
+  const priorityBadge = (priority) => {
+  switch (priority) {
+    case 'High':
+      return <Badge bg="danger">{priority}</Badge>;
+    case 'Medium':
+      return <Badge bg="warning">{priority}</Badge>;
+    case 'Low':
+      return <Badge bg="success">{priority}</Badge>;
+    default:
+      return null;
+  }
+};
   return (    
       <Wrapper>
         <form className={showSidebar ? 'table' : 'table-move'}>
@@ -134,7 +148,7 @@ const Tickets = () => {
                       <td>{ticket.submittedBy}</td>
                       <td>{ticket.ticketType}</td>
                       <td>{ticket.ticketStatus}</td>
-                      <td>{ticket.ticketPriority}</td>
+                      <td>{priorityBadge(ticket.ticketPriority)}</td>
                       <td><p onClick={() => handleDetail(ticket.id)}>More Details</p></td>
                     </tr>
                   ))}

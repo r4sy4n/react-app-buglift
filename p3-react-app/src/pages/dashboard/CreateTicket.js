@@ -6,8 +6,6 @@ import { toast } from 'react-toastify';
 import { AppContext } from '../../App';
 import { v4 as uuidv4 } from 'uuid';
 
-
-
 const Wrapper = styled.section`
   border-radius: 0.25rem;
   width: 100%;
@@ -82,7 +80,7 @@ const CreateTicket = () => {
     ticketType: ['Bugs/Error', 'Feature Request', 'Task'],
     ticketPriority: ['Low', 'Medium', 'High'],
     ticketStatus: ['Open'],
-    nameValues: 'Project 1',
+    nameValues: 'Project A',
     typeValues: 'Bugs/Error',
     priorityValues: 'High',
     statusValues: 'Open',
@@ -151,7 +149,8 @@ const CreateTicket = () => {
       ...tickets,
         newEntry
     ]);
-  }
+  };
+
   return (
     <Wrapper> 
       <form className={showSidebar ? 'form' : 'form-move'} onSubmit={submitHandler}>
