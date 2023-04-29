@@ -111,9 +111,9 @@ const TicketDetails = () => {
   const handleCommentChange = (event) => {
         setComment(event.target.value);
     };
-  const handleCommenterChange = (event) => {
-    setCommenter(event.target.value);
-  };
+  // const handleCommenterChange = (event) => {
+  //   setCommenter(event.target.value);
+  // };
   
 
   return (

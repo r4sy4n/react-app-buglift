@@ -5,23 +5,25 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Dashboard, Tickets, Projects, CreateProject, CreateTicket, EditTicket, SharedLayout, UserProfile, Admin, ProjectDetails, TicketDetails} from './pages/dashboard/';
 import { createContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 export const AppContext = createContext();
 
 const initialProjects = [
   {
-    id: 'ab',
+    id: uuidv4(),
     name: "Project A",
     description: "This project aims to build a web application for managing inventory",
     detail: "",
   },
   {
-    id: 'cd',
+    id: uuidv4(),
     name: "Project B",
     description: "This project focuses on developing a machine learning algorithm for predicting customer churn",
     detail: "",
   },
   {
-    id: 'ef',
+    id: uuidv4(),
     name: "Project C",
     description: "This project involves building a mobile app for ordering food from local restaurants",
     detail: "",
@@ -29,7 +31,7 @@ const initialProjects = [
 ];
 const initialTicket = ([
     {
-      id: 'gh',
+      id: uuidv4(),
       project: "Project A",
       title: "Fix login page issue",
       ticketDescription: "Please fix login page because it is not working when you are clicking submit",
@@ -39,7 +41,7 @@ const initialTicket = ([
       ticketPriority: "High",
     },
     {
-      id: 'ij',
+      id: uuidv4(),
       project: "Project B",
       title: "Add new feature to dashboard",
       ticketDescription: "Please add new chart feature when user opens the dashboard",
@@ -49,7 +51,7 @@ const initialTicket = ([
       ticketPriority: "Medium",
     },
     {
-      id: 'kl',
+      id: uuidv4(),
       project: "Project C",
       title: "Update payment system",
       ticketDescription: "Please implement gcash and paymaya to our payment system",

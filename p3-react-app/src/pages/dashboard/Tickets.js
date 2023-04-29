@@ -72,6 +72,23 @@ p:hover {
     background: #f0f4f8;
     border: 1px solid #bcccdc;
 }
+.badge {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.7rem;
+  text-align: center;
+  margin: 0.3rem;
+  border-radius: 5px;
+  color: #fff;
+}
+.danger{
+  background: #FF1700;
+}
+.warning{
+  background: #F77E21;
+}
+.success{
+  background: #367E18;
+}
 `
 
 const Tickets = () => {
@@ -95,7 +112,7 @@ const Tickets = () => {
       return ticket.ticketStatus === sortOption;
     }
   });
-  console.log(sortOption)
+  
   const handleSortOptionChange = (e) => {
     setSortOption(e.target.value);
     
@@ -103,11 +120,11 @@ const Tickets = () => {
   const priorityBadge = (priority) => {
   switch (priority) {
     case 'High':
-      return <Badge bg="danger">{priority}</Badge>;
+      return <span className="badge danger">{priority}</span>;
     case 'Medium':
-      return <Badge bg="warning">{priority}</Badge>;
+      return <span className="badge warning">{priority}</span>;
     case 'Low':
-      return <Badge bg="success">{priority}</Badge>;
+      return <span className="badge success">{priority}</span>;
     default:
       return null;
   }

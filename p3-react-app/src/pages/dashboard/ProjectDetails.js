@@ -29,6 +29,10 @@ const Wrapper = styled.section`
   hr{
     color: #f0f4f8;
   }
+  span{
+    text-decoration: underline;
+    color: blue;
+  }
   span:hover {
   color: #E21818;
   cursor: pointer;
@@ -41,7 +45,7 @@ const Wrapper = styled.section`
   }
 `
 const ProjectDetails = () => {
-  const {projects} = useContext(AppContext);
+  const {projects, tickets} = useContext(AppContext);
   const navigate = useNavigate();
   const {id} = useParams();
   const handleDetail = (e) => {
@@ -97,15 +101,15 @@ const ProjectDetails = () => {
                     <th>Title</th>
                     <th>Submitted by</th>
                     <th>Status</th>
-                    <th></th>
+                    <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {projects.map((project, index) => (
-                    <tr>
-                      <td>Ticket Title</td>
-                      <td>User</td>
-                      <td>Open</td>
+                  {tickets.filter(ticket => ticket.id === (id)).map((ticket, index) =>  (
+                    <tr key={index}>
+                      <td>{ticket.title}</td>
+                      <td>{ticket.submittedBy}</td>
+                      <td>{ticket.ticketStatus}</td>
                       <td>More Details</td>
                     </tr>
                   ))}
