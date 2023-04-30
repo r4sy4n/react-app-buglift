@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { SharedLayoutContext } from './SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from "../../App";
-import { Badge } from 'react-bootstrap';
 
 
 const Wrapper = styled.section`
@@ -74,7 +73,7 @@ p:hover {
 }
 .badge {
   font-size: 0.8rem;
-  padding: 0.2rem 0.7rem;
+  padding: 0.3rem 0.8rem;
   text-align: center;
   margin: 0.3rem;
   border-radius: 5px;

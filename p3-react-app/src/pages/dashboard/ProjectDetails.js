@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Wrapper = styled.section`
   border-radius: 0.25rem;
   width: 100%;
+  max-width: 80vw;
   background: #fff;
   padding: 3rem 2rem 4rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -26,6 +27,11 @@ const Wrapper = styled.section`
     justify-content: center;
     flex-direction: column;
   }
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }  
   hr{
     color: #f0f4f8;
   }
@@ -43,6 +49,16 @@ const Wrapper = styled.section`
   th, td{
     padding: 0 3rem;
   }
+  .more-details {
+  display: inline-block;
+  margin-top: 18px;
+  text-decoration: underline;
+  color: blue;
+  }
+  .more-details:hover {
+    color: #E21818;
+    cursor: pointer;
+  }
 `
 const ProjectDetails = () => {
   const {projects, tickets} = useContext(AppContext);
@@ -52,18 +68,27 @@ const ProjectDetails = () => {
     e.preventDefault();
     navigate('/projects');
   }
+  const filteredProjects = projects.filter(project => project.id === id);
+  const project = filteredProjects.length > 0 ? filteredProjects[0] : null;
+
+  const projectTickets = tickets.filter(ticket => ticket.project === project.name);
+
+  const handleDetailTickets = (id) => {
+    navigate(`/ticketdetails/${id}`);
+  }
+
   return (
     <Wrapper>
         <h3>Project Details</h3>
         <span onClick={handleDetail}>Back to list</span>
-        <section className='flex grid-item'>
+        <section className='grid-item'>
           {projects.filter(project => project.id === (id)).map(project => (
             <div className='grid'>
-              <div key={project.id}>
+              <div className='flex-column' key={project.id}>
                   <h4>Project Name</h4>
                   <p>{project.name}</p>
               </div>
-              <div key={project.name}>
+              <div className='flex-column' key={project.name}>
                   <h4>Description</h4>
                   <p>{project.description}</p>
               </div>  
@@ -105,12 +130,12 @@ const ProjectDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {tickets.filter(ticket => ticket.id === (id)).map((ticket, index) =>  (
+                  {projectTickets.map((ticket, index) =>  (
                     <tr key={index}>
                       <td>{ticket.title}</td>
                       <td>{ticket.submittedBy}</td>
                       <td>{ticket.ticketStatus}</td>
-                      <td>More Details</td>
+                      <td><p className='more-details' onClick={() => handleDetailTickets(ticket.id)}>More Details</p></td>
                     </tr>
                   ))}
                 </tbody>
