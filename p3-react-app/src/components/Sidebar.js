@@ -8,17 +8,13 @@ import Navlinks from './Navlinks';
 const Wrapper = styled.aside`
 box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
 transition: 0.3s ease-in-out all;
-/* display: none; */
   .sidebar-container {
         background: #fff;
         min-height: 100vh;
         height: 100%;
         width: 250px;
-        /* margin-left: 0; */
-        /* display: none; */
         transition: 0.3s ease-in-out all;
         z-index: 1;
-        
     }
   .content {
       position: sticky;
@@ -68,6 +64,9 @@ transition: 0.3s ease-in-out all;
     .nav-link:hover .icon {
       color: #E21818;
     }
+  @media only screen and (max-width: 992px) {
+    display: none;
+  }
 `
 const Sidebar = () => {
       const {showSidebar} = useContext(SharedLayoutContext);

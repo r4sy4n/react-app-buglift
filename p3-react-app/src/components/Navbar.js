@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import {Banner} from '../components';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {SlLogout} from 'react-icons/sl'
-import { Link } from 'react-router-dom';
 import { SharedLayoutContext } from '../pages/dashboard/SharedLayout';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -66,6 +65,11 @@ const Wrapper = styled.nav`
     margin-left: 0px;
     transition: 0.3s ease-in-out all;
   }
+  @media only screen and (max-width: 992px) {
+  .nav-center {
+    margin-left: 0;
+  }
+  }
 `
 
 const Navbar = () => {
@@ -90,13 +94,12 @@ const Navbar = () => {
             <GiHamburgerMenu />
           </button>
             <Banner />
-          {/* <Link to='createticket' className='btn'>New Ticket</Link> */}
           <button type='button' className='logout-btn' onClick={Logout}>
             <SlLogout/>
           </button>
       </div>
     </Wrapper>
   )
-}
+};
 
 export default Navbar;

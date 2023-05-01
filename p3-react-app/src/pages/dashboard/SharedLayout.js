@@ -20,7 +20,6 @@ const Wrapper = styled.section`
     }
     .hide{
       margin-left: -250px;
-      /* display: none; */
       transition: 0.3s ease-in-out all;
     }
     .move-side{
@@ -31,6 +30,16 @@ const Wrapper = styled.section`
       left: 30px;
       transition: 0.3s ease-in-out all; 
     }
+    @media only screen and (max-width: 992px) {
+    .dashboard-page {
+      margin: 0 auto;
+      padding: 2rem 0;
+      position: absolute;
+      top: 6.5rem;
+      left: 30px;
+      transition: 0.3s ease-in-out all;
+    }
+  }
 `
 
 const SharedLayout = () => {
@@ -48,7 +57,7 @@ const SharedLayout = () => {
     <SharedLayoutContext.Provider value={{showSidebar, setShowsidebar}}>
       <Wrapper>
           <main className='dashboard'>
-              {/* <Smallsidebar /> */}
+              <Smallsidebar />
               <Sidebar />
               <div>
                   <Navbar />

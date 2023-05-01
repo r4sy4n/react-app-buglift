@@ -59,6 +59,15 @@ const Wrapper = styled.section`
     color: #E21818;
     cursor: pointer;
   }
+  @media only screen and (max-width: 1392px){
+    .grid {
+    display: flex;
+    flex-direction: column;
+    }
+    .margin-top{
+      margin-top: 4rem;
+    }   
+  } 
 `
 const ProjectDetails = () => {
   const {projects, tickets} = useContext(AppContext);
@@ -117,7 +126,7 @@ const ProjectDetails = () => {
                 </tbody>
               </table>
           </div>
-          <div className='flex-item'>
+          <div className='flex-item margin-top'>
             <h3>Tickets for this project</h3>
             <p>Current ticket details</p>
             <table>

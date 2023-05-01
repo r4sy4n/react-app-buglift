@@ -88,6 +88,22 @@ p:hover {
 .success{
   background: #367E18;
 }
+.completed{
+  background: #07689F;
+}.in-progress{
+  background: #40A8C4;
+}.open{
+  background: #EBB02D;
+}
+.task{
+  background: #B206B0;
+}
+.feature{
+  background: #6F1AB6;
+}
+.bugs{
+  background: #CD0404;
+}
 `
 
 const Tickets = () => {
@@ -117,17 +133,41 @@ const Tickets = () => {
     
   }
   const priorityBadge = (priority) => {
-  switch (priority) {
-    case 'High':
-      return <span className="badge danger">{priority}</span>;
-    case 'Medium':
-      return <span className="badge warning">{priority}</span>;
-    case 'Low':
-      return <span className="badge success">{priority}</span>;
-    default:
-      return null;
-  }
-};
+    switch (priority) {
+      case 'High':
+        return <span className="badge danger">{priority}</span>;
+      case 'Medium':
+        return <span className="badge warning">{priority}</span>;
+      case 'Low':
+        return <span className="badge success">{priority}</span>;
+      default:
+        return null;
+    }
+  };
+  const statusBadge = (status) => {
+    switch (status) {
+      case 'Completed':
+        return <span className="badge completed">{status}</span>;
+      case 'In Progress':
+        return <span className="badge in-progress">{status}</span>;
+      case 'Open':
+        return <span className="badge open">{status}</span>;
+      default:
+        return null;
+    }
+  };
+  const typeBadge = (type) => {
+    switch (type) {
+      case 'Bugs/Error':
+        return <span className="badge bugs">{type}</span>;
+      case 'Feature Request':
+        return <span className="badge feature">{type}</span>;
+      case 'Task':
+        return <span className="badge task">{type}</span>;
+      default:
+        return null;
+    }
+  };
   return (    
       <Wrapper>
         <form className={showSidebar ? 'table' : 'table-move'}>
@@ -162,8 +202,8 @@ const Tickets = () => {
                       <td>{ticket.title}</td>
                       <td>{ticket.project}</td>
                       <td>{ticket.submittedBy}</td>
-                      <td>{ticket.ticketType}</td>
-                      <td>{ticket.ticketStatus}</td>
+                      <td>{typeBadge(ticket.ticketType)}</td>
+                      <td>{statusBadge(ticket.ticketStatus)}</td>
                       <td>{priorityBadge(ticket.ticketPriority)}</td>
                       <td><p onClick={() => handleDetail(ticket.id)}>More Details</p></td>
                     </tr>

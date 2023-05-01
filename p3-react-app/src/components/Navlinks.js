@@ -1,7 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import links from '../utils/links';
 
-const Navlinks = () => {
+const Navlinks = (close) => {
+  const handleLinkClick = () => {
+    if (typeof close.toggle === 'function') {
+      close.toggle();
+    }
+  }
   return (
     <div className='nav-links'>
       {links.map((link) => {
@@ -13,6 +18,7 @@ const Navlinks = () => {
               return isActive ? 'nav-link active' : 'nav-link';
             }}
             key={id}
+            onClick={handleLinkClick}
           >
             <span className='icon'>{icon}</span>
             {text}

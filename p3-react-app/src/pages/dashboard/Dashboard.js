@@ -46,6 +46,15 @@ const Wrapper = styled.section`
   background: #fff;  
   transition: 0.3s ease-in-out all;
 }
+@media only screen and (max-width: 1392px) {
+  .grid-chart{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+    align-items: center;
+    justify-content: center;
+  }
+}
 `
 
 const Dashboard = () => {
