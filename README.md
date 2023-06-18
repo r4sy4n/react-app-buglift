@@ -51,7 +51,7 @@ BugLift incorporates Create, Read, Update, and Delete (CRUD) functionalities to 
 
 ## Credits
 
-The game was developed by Russell Ramiro as a project to showcase programming skills and knowledge of web development technologies.
+The app was developed by Russell Ramiro as a project to showcase programming skills and knowledge of web development technologies.
 
 ## License
 
