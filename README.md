@@ -1,4 +1,4 @@
-# BugLift App
+# Buglift App
 
 Welcome to the Buglift repository! This repository contains the source code for BugLift, a web application developed using Create React App. BugLift showcases my skills in React, HTML, CSS, JavaScript, and CRUD functionalities.
 
